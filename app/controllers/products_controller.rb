@@ -3,7 +3,9 @@ class ProductsController < ApplicationController
 
 
   def index
-  @products = Product.price_higher_than(20).price_lower_than(25).name_contains('White')
+  @products = Product.filter(params.slice(:price_higher_than, :price_lower_than, :name_contains))
+
+#  @products = Product.price_higher_than(20).price_lower_than(25).name_contains('White')
 #    @products = Product.where("price > 20")
   end
 
