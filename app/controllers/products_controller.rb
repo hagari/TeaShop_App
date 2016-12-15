@@ -1,36 +1,35 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-
+  # GET /
+  # index page returns the most expensive teas
   def index
-  @products = Product.filter(params.slice(:price_higher_than, :price_lower_than, :name_contains))
-
-#  @products = Product.price_higher_than(20).price_lower_than(25).name_contains('White')
-#    @products = Product.where("price > 20")
+  @products = Product.price_higher_than(20) #TO DO: change numeric constant to parameter set by site admin
+    render :json => @products
   end
-
-#  def index
-#   @products = Product.where("price > 20")
-#  end
 
   # GET /products
   # GET /products.json
   def all
-    @products = Product.all
+    @products = Product.filter(params.slice(:price_higher_than, :price_lower_than, :name_contains))
+    render :json => @products
   end
   
   # GET /products/1
   # GET /products/1.json
   def show
+    render :json => @product
   end
 
   # GET /products/new
   def new
     @product = Product.new
+    render :json => @product
   end
 
   # GET /products/1/edit
   def edit
+    render :json => @product
   end
 
   # POST /products
