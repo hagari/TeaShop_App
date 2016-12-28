@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def all
-    @products = Product.filter(params.slice(:price_higher_than, :price_lower_than, :name_contains))
+    @products = Product.filter(params.slice(:price_higher_than, :price_lower_than, :name_contains)) #server-side filter
     render :json => @products
   end
   
